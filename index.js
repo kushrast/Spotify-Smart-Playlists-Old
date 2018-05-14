@@ -141,5 +141,5 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-console.log('Listening on 5000');
+console.log('Listening on PORT');
 app.listen(process.env.PORT);
