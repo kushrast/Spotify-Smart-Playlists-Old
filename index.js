@@ -12,9 +12,9 @@ var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
-var client_id = 'CLIENT_ID'; // Your client id
-var client_secret = 'CLIENT_SECRET'; // Your secret
-var redirect_uri = 'REDIRECT_URI'; // Your redirect uri
+var client_id = '0a5c5df0c91e48ab9da23fc2facc3c40'; // Your client id
+var client_secret = 'bc3359f757a14b49b5740cf643b1b632'; // Your secret
+var redirect_uri = 'https://spotify-sessions-kush.herokuapp.com/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
