@@ -89,6 +89,7 @@
         if (error) {
           alert('There was an error during the authentication');
         } else {
+          console.log(access_token);
           if (access_token) {
             // render oauth info
             oauthPlaceholder.innerHTML = oauthTemplate({
