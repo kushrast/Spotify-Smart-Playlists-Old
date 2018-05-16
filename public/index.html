@@ -112,7 +112,7 @@
                   'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
-                  userPlaylistsPlaceholder.innerHTML = userProfileTemplate(response);
+                  userPlaylistsPlaceholder.innerHTML = userPlaylistsTemplate(response);
                   $('#login').hide();
                   $('#loggedin').show();
                 }
