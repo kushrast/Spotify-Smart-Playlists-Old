@@ -177,6 +177,7 @@
           }, false);
 
           document.getElementById('body').addEventListener('click', function(event) {
+            console.log(event);
             if (event.target !== event.currentTarget) {
               console.log(event);
               if ($(event.target).hasClass('playlist_uri')) {
