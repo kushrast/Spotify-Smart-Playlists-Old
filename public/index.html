@@ -59,8 +59,10 @@
       <div class="playlist-body" id="playlist-bod">
         {{#items}}
           <dl class="dl-horizontal playlist_uri" id="{{id}}">
-            <dt>Name</dt><dd>{{name}}</a></dd>
-            <dt>URI</dt><dd>{{uri}}</dd>
+            <a>
+              <dt>Name</dt><dd>{{name}}</a></dd>
+              <dt>URI</dt><dd>{{uri}}</dd>
+            </a>
           </dl>
         {{/items}}
       </div>
@@ -176,6 +178,7 @@
 
           document.getElementById('playlist-bod').addEventListener('click', function(event) {
             if (event.target !== event.currentTarget) {
+              console.log(event);
               if ($(event.target).hasClass('playlist_uri')) {
                 var playlist_id = event.target.id;
                 $.ajax({
