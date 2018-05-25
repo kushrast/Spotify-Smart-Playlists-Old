@@ -178,24 +178,21 @@
 
           document.getElementById('container').addEventListener('click', function(event) {
             console.log(event);
-            if (event.target != event.currentTarget) {
-              console.log(event);
-              if ($(event.target).hasClass('playlist_uri')) {
-                var playlist_id = event.target.id;
-                $.ajax({
-                  url: "https://api.spotify.com/v1/users/"+id+"/playlists/"+playlist_id+"/tracks",
-                  headers: {
-                  'Authorization': 'Bearer ' + access_token
-                  },
-                  success: function(response) {
-                  userPlaylistInfoPlaceholder.innerHTML = userPlaylistInfoTemplate(response);
-                  $('#login').hide();
-                  $('#loggedin').show();
-                  $('#user-playlists').hide();
-                  $('#user-playlist-info').show();
-                  }
-                });
-              }
+            if ($(event.target).hasClass('playlist_uri')) {
+              var playlist_id = event.target.id;
+              $.ajax({
+                url: "https://api.spotify.com/v1/users/"+id+"/playlists/"+playlist_id+"/tracks",
+                headers: {
+                'Authorization': 'Bearer ' + access_token
+                },
+                success: function(response) {
+                userPlaylistInfoPlaceholder.innerHTML = userPlaylistInfoTemplate(response);
+                $('#login').hide();
+                $('#loggedin').show();
+                $('#user-playlists').hide();
+                $('#user-playlist-info').show();
+                }
+              });
             }
           });
         }
