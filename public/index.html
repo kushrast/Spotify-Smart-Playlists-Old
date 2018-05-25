@@ -25,7 +25,11 @@
       <div id="loggedin">
         <div id="user-profile">
         </div>
-        <div id="user-playlists">
+        <div id="info">
+          <div id="user-playlists">
+          </div>
+          <div id="user-playlist-info">
+          </div>
         </div>
         <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
       </div>
@@ -52,11 +56,22 @@
     </script>
 
     <script id="user-playlists-template" type="text/x-handlebars-template">
-      <div class="playlist-body">
+      <div class="playlist-body" id="playlist-bod">
+        {{#items}}
+          <dl class="dl-horizontal playlist_uri" id="{{id}}">
+            <dt>Name</dt><dd>{{name}}</a></dd>
+            <dt>URI</dt><dd>{{uri}}</dd>
+          </dl>
+        {{/items}}
+      </div>
+    </script>
+
+    <script id="user-playlist-info-template" type="text/x-handlebars-template">
+      <div class="songs-body">
         {{#items}}
           <dl class="dl-horizontal">
-            <dt>Name</dt><dd>{{name}}</dd>
-            <dt>URI</dt><dd>{{uri}}</dd>
+            <dt>Track</dt><dd>{{track}}</a></dd>
+            <dt>Added At</dt><dd>{{added_at}}</dd>
           </dl>
         {{/items}}
       </div>
@@ -85,10 +100,15 @@
         var userPlaylistsSource = document.getElementById('user-playlists-template').innerHTML,
             userPlaylistsTemplate = Handlebars.compile(userPlaylistsSource),
             userPlaylistsPlaceholder = document.getElementById('user-playlists');
+        var userPlaylistInfoSource = document.getElementById('user-playlist-info-template').innerHTML,
+            userPlaylistInfoTemplate = Handlebars.compile(userPlaylistInfoSource),
+            userPlaylistInfoPlaceholder = document.getElementById('user-playlist-info');
         var params = getHashParams();
         var access_token = params.access_token,
             refresh_token = params.refresh_token,
             error = params.error;
+
+        var id = null;
         if (error) {
           alert('There was an error during the authentication');
         } else {
@@ -101,8 +121,11 @@
                 },
                 success: function(response) {
                   userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+                  id = response.id;
                   $('#login').hide();
                   $('#loggedin').show();
+                  $('#user-playlists').show();
+                  $('#user-playlist-info').hide();
                 }
             });
 
@@ -115,6 +138,8 @@
                   userPlaylistsPlaceholder.innerHTML = userPlaylistsTemplate(response);
                   $('#login').hide();
                   $('#loggedin').show();
+                  $('#user-playlists').show();
+                  $('#user-playlist-info').hide();
                 }
             });
           } else {
@@ -130,12 +155,43 @@
               }
             }).done(function(data) {
               access_token = data.access_token;
+            });
+          }, false);
+
+          document.getElementById('obtain-new-token').addEventListener('click', function() {
+            $.ajax({
+              url: '/refresh_token',
+              data: {
+                'refresh_token': refresh_token
+              }
+            }).done(function(data) {
+              access_token = data.access_token;
               oauthPlaceholder.innerHTML = oauthTemplate({
                 access_token: access_token,
                 refresh_token: refresh_token
               });
             });
           }, false);
+
+          document.getElementById('playlist-bod').addEventListener('click', function(event) {
+            if (event.target !== event.currentTarget) {
+              if ($(event.target).hasClass('playlist_uri')) {
+                var playlist_id = event.target.id;
+                $.ajax({
+                  url: "https://api.spotify.com/v1/users/"+id+"/playlists/"+playlist_id+"/tracks",
+                  headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
+                success: function(response) {
+                  userPlaylistInfoPlaceholder.innerHTML = userPlaylistInfoTemplate(response);
+                  $('#login').hide();
+                  $('#loggedin').show();
+                  $('#user-playlists').hide();
+                  $('#user-playlist-info').show();
+                }
+              }
+            });
+          }
         }
       })();
     </script>
