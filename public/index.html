@@ -121,6 +121,7 @@
                 },
                 success: function(response) {
                   userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+                  console.log(response);
                   id = response.id;
                   $('#login').hide();
                   $('#loggedin').show();
@@ -181,17 +182,18 @@
                   url: "https://api.spotify.com/v1/users/"+id+"/playlists/"+playlist_id+"/tracks",
                   headers: {
                   'Authorization': 'Bearer ' + access_token
-                },
-                success: function(response) {
+                  },
+                  success: function(response) {
                   userPlaylistInfoPlaceholder.innerHTML = userPlaylistInfoTemplate(response);
                   $('#login').hide();
                   $('#loggedin').show();
                   $('#user-playlists').hide();
                   $('#user-playlist-info').show();
-                }
+                  }
+                });
               }
-            });
-          }
+            }
+          });
         }
       })();
     </script>
