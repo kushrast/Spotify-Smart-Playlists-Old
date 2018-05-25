@@ -58,10 +58,10 @@
     <script id="user-playlists-template" type="text/x-handlebars-template">
       <div class="playlist-body" id="playlist-bod">
         {{#items}}
-          <dl class="dl-horizontal playlist_uri" id="{{id}}">
+          <dl class="dl-horizontal">
             <a>
-              <dt>Name</dt><dd>{{name}}</a></dd>
-              <dt>URI</dt><dd>{{uri}}</dd>
+              <dt class="playlist_uri" id="{{id}}">Name</dt><dd>{{name}}</a></dd>
+              <dt class="playlist_uri" id="{{id}}">URI</dt><dd>{{uri}}</dd>
             </a>
           </dl>
         {{/items}}
