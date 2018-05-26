@@ -138,7 +138,7 @@ router.get('/playlists/', function(req, res, next) {
 	} else {
 		var uri = req.query.uri.split(":");
 		var options = {
-          url: 'https://api.spotify.com/v1/me/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
+          url: 'https://api.spotify.com/v1/playlists/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
           headers: { 'Authorization': 'Bearer ' + req.session.access_token },
           json: true
         };
