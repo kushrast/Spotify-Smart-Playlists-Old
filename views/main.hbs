@@ -15,13 +15,13 @@
     </dl>
   </div>
   <div class="playlist-body" id="playlist-bod">
-    {{#playlist.items}}
+    {{#playlists.items}}
       <dl class="dl-horizontal">
         <a>
-          <dt class="playlist_uri" id="{{playlist.id}}">Name</dt><dd>{{playlist.name}}</a></dd>
-          <dt class="playlist_uri" id="{{playlist.id}}">URI</dt><dd>{{playlist.uri}}</dd>
+          <dt class="playlist_uri" id="{{playlists.id}}">Name</dt><dd>{{playlists.name}}</a></dd>
+          <dt class="playlist_uri" id="{{playlists.id}}">URI</dt><dd>{{playlists.uri}}</dd>
         </a>
       </dl>
-    {{/playlist.items}}
+    {{/playlists.items}}
   </div>
 </div>
