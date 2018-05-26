@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser'); //loads cookie parser library
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var querystring = require('querystring')
 var bodyParser = require('body-parser');
 var request = require('request');
 
