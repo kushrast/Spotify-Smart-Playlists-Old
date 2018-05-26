@@ -23,10 +23,14 @@ var router = express.Router();
 app.use('/', router);
 
 router.get('/', function(req, res, next) {
+	res.redirect('/login');
+});
+
+router.get('/login', function(req, res, next) {
 	res.render('index', {
 		title: 'Node Tutorial'
-	});
-});
+	})
+})
 
 router.post('/', function(req, res, next) {
 	var body = req.body;
