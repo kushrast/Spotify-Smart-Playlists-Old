@@ -5,7 +5,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-var request = require('request');
+var request = require('requests');
 
 var app = express();
 
