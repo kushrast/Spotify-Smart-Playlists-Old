@@ -131,12 +131,21 @@ router.get('/callback', function(req, res, next) {
   }
 });
 
-router.get('/playlists/:id', function(req, res, next) {
+router.get('/playlists/:uid/:pid', function(req, res, next) {
 	console.log(req.session);
 	if (!req.session.access_token) {
 		res.redirect("/invalid");
 	} else {
-		res.render('welcome', {'first_name': req.params.id, 'last_name': req.params.id});
+		var options = {
+          url: 'https://api.spotify.com/v1/users/'+req.params.uid+'/playlists/'+req.params.pid+'/tracks',
+          headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+          json: true
+        };
+
+        // use the access token to access the Spotify Web API
+        request.get(options, function(error, response, playlist) {
+			res.render('playlists', playlist);
+		}
 	}
 });
 
