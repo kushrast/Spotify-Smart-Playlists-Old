@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'yay area', cookie: { maxAge: 60000 , secure: true}}))
+app.use(session({ secret: 'yay area', cookie: { maxAge: 60000}}))
 
 var client_id = '0a5c5df0c91e48ab9da23fc2facc3c40'; // Your client id
 var client_secret = 'bc3359f757a14b49b5740cf643b1b632'; // Your secret
@@ -132,6 +132,7 @@ router.get('/callback', function(req, res, next) {
 });
 
 router.get('/playlists/:id', function(req, res, next) {
+	console.log(req.session);
 	if (!req.session.access_token) {
 		res.redirect("/invalid");
 	} else {
