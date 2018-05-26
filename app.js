@@ -7,6 +7,7 @@ var logger = require('morgan');
 var querystring = require('querystring')
 var bodyParser = require('body-parser');
 var request = require('request');
+var session = require('express-session');
 
 var app = express();
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: 'yay area', cookie: { maxAge: 60000 , secure: true}}))
 
 var client_id = '0a5c5df0c91e48ab9da23fc2facc3c40'; // Your client id
 var client_secret = 'bc3359f757a14b49b5740cf643b1b632'; // Your secret
@@ -46,7 +48,7 @@ var router = express.Router();
 app.use('/', router);
 
 router.get('/', function(req, res, next) {
-	res.redirect('/login');
+	res.redirect('/login'); //incorporate session data soon
 });
 
 router.get('/login', function(req, res, next) {
@@ -101,6 +103,8 @@ router.get('/callback', function(req, res, next) {
         var access_token = body.access_token,
             refresh_token = body.refresh_token;
 
+        req.session.access_token = access_token;
+        req.session.refresh_token = refresh_token;
         var options = {
           url: 'https://api.spotify.com/v1/me',
           headers: { 'Authorization': 'Bearer ' + access_token },
@@ -117,7 +121,7 @@ router.get('/callback', function(req, res, next) {
 
 	        // use the access token to access the Spotify Web API
 	        request.get(options, function(error, response, playlists) {
-        		res.render('main', {'profile':profile, 'playlists':playlists, 'access': {'access': access_token, 'refresh': refresh_token}});
+        		res.render('main', {'profile':profile, 'playlists':playlists});
         	});
         });
       } else {
@@ -125,6 +129,14 @@ router.get('/callback', function(req, res, next) {
       }
     });
   }
+});
+
+router.get('/playlists/:id', function(req, res, next) {
+	if (!req.session.access_token) {
+		res.redirect("/invalid");
+	} else {
+		res.render('welcome', {'first_name': req.params.id, 'last_name': req.params.id});
+	}
 });
 
 router.post('/', function(req, res, next) {
