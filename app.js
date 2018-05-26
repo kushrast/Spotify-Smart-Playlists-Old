@@ -131,12 +131,12 @@ router.get('/callback', function(req, res, next) {
   }
 });
 
-router.get('/playlists/:uri', function(req, res, next) {
+router.get('/playlists/', function(req, res, next) {
 	console.log(req.session);
 	if (!req.session.access_token) {
 		res.redirect("/invalid");
 	} else {
-		var uri = req.params.uri.split(":");
+		var uri = req.query.uri.split(":");
 		var options = {
           url: 'https://api.spotify.com/v1/me/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
           headers: { 'Authorization': 'Bearer ' + req.session.access_token },
