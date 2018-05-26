@@ -117,7 +117,7 @@ router.get('/callback', function(req, res, next) {
 
 	        // use the access token to access the Spotify Web API
 	        request.get(options, function(error, response, playlists) {
-        		res.render('main', {profile, playlists});
+        		res.render('main', {'profile':profile, 'playlists':playlists});
         	});
         });
       } else {
