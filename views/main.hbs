@@ -17,7 +17,7 @@
   <div class="playlist-body" id="playlist-bod">
     {{#playlists.items}}
       <dl class="dl-horizontal">
-        <a>
+        <a href="/playlists/{{id}}#access={{access.access}}+refresh={{access.refresh}}">
           <dt class="playlist_uri" id="{{id}}">Name</dt><dd>{{name}}</a></dd>
           <dt class="playlist_uri" id="{{id}}">URI</dt><dd>{{uri}}</dd>
         </a>
