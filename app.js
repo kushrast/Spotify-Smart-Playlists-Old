@@ -108,8 +108,16 @@ router.get('/callback', function(req, res, next) {
         };
 
         // use the access token to access the Spotify Web API
-        request.get(options, function(error, response, body) {
-        	res.render('main', body);
+        request.get(options, function(error, response, profile) {
+        	var options = {
+	          url: 'https://api.spotify.com/v1/me/playlists',
+	          headers: { 'Authorization': 'Bearer ' + access_token },
+	          json: true
+	        };
+
+	        // use the access token to access the Spotify Web API
+	        request.get(options, function(error, response, playlists) {
+        		res.render('main', profile, playlists);
         });
       } else {
         res.redirect('/invalid');
