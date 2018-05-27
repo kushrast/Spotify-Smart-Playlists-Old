@@ -1,8 +1,15 @@
 <div class="playlist-body" id="playlist-bod">
+	<ul id="tracks">
 	{{#items}}
-	  <dl class="dl-horizontal">
+	  <li class="dl-horizontal">
 	      <dt class="playlist_uri">Added At</dt><dd>{{added_at}}</a></dd>
 	      <dt class="playlist_uri">Name</dt><dd>{{track.name}}</a></dd>
-	  </dl>
+	  </li>
 	{{/items}}
+	</ul>
 </div>
+
+<script>
+	var list = document.getElementById("tracks");
+	Sortable.create(list); // That's all.
+</script>
