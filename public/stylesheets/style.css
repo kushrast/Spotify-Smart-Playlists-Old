@@ -10,3 +10,7 @@ a {
 #tracks {
     display: list-item;
 }
+
+#curr {
+	min-height: 50px
+}
