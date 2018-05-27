@@ -48,7 +48,11 @@ var router = express.Router();
 app.use('/', router);
 
 router.get('/', function(req, res, next) {
-	res.redirect('/login'); //incorporate session data soon
+	if (req.session.access_token) {
+		res.redirect('/main');
+	} else {
+		res.redirect('/login'); //incorporate session data soon
+	}
 });
 
 router.get('/login', function(req, res, next) {
@@ -105,7 +109,17 @@ router.get('/callback', function(req, res, next) {
 
         req.session.access_token = access_token;
         req.session.refresh_token = refresh_token;
-        var options = {
+        res.redirect('/main');
+      } else {
+        res.redirect('/invalid');
+      }
+    });
+  }
+});
+
+router.get('/main', function(req, res, next) {
+	var access_token = req.session.access_token;
+	var options = {
           url: 'https://api.spotify.com/v1/me',
           headers: { 'Authorization': 'Bearer ' + access_token },
           json: true
@@ -124,12 +138,7 @@ router.get('/callback', function(req, res, next) {
         		res.render('main', {'profile':profile, 'playlists':playlists});
         	});
         });
-      } else {
-        res.redirect('/invalid');
-      }
-    });
-  }
-});
+})
 
 router.get('/playlists/', function(req, res, next) {
 	console.log(req.session);
