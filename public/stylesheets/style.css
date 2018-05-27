@@ -6,3 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
+
+.list-group-item {
+    display: list-item;
+}
