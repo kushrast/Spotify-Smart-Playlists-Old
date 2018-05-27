@@ -15,13 +15,16 @@
     </dl>
   </div>
   <div class="playlist-body" id="playlist-bod">
+    <ul id="tracks" class="list-group">
     {{#playlists.items}}
-      <dl class="dl-horizontal">
-        <a href="/playlists?uri={{uri}}">
-          <dt class="playlist_uri" id="{{id}}">Name</dt><dd>{{name}}</a></dd>
-          <dt class="playlist_uri" id="{{id}}">URI</dt><dd>{{uri}}</dd>
-        </a>
-      </dl>
+      <li class="dl-horizontal list-group-item">
+        <dl class="dl-horizontal">
+          <a href="/playlists?uri={{uri}}">
+            <dt class="playlist_uri" id="{{id}}">Name</dt><dd>{{name}}</a></dd>
+            <dt class="playlist_uri" id="{{id}}">URI</dt><dd>{{uri}}</dd>
+          </a>
+        </dl>
+      </li>
     {{/playlists.items}}
   </div>
 </div>
