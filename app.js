@@ -185,9 +185,9 @@ app.post('/play_current', function(req, res) {
 	var body = JSON.parse(Object.keys(req.body)[0]);
 	var options = {
       url: 'https://api.spotify.com/v1/me/player/play',
-      headers: { 'Authorization': 'Bearer ' + req.body.access },
+      headers: { 'Authorization': 'Bearer ' + body.access },
       data: JSON.stringify({
-      	'uris': req.body.uris
+      	'uris': body.uris
       }),
       json: true
     };
