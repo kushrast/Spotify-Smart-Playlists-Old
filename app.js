@@ -181,7 +181,7 @@ router.get('/invalid', function(req, res, next) {
 	res.render('invalid');
 })
 
-app.get('/play_current', function(req, res) {
+app.post('/play_current', function(req, res) {
 	var options = {
       url: 'https://api.spotify.com/v1/me/player/play',
       headers: { 'Authorization': 'Bearer ' + req.body.access_token },
@@ -192,6 +192,7 @@ app.get('/play_current', function(req, res) {
     };
 
     console.log(options);
+    console.log(req.body);
 
     // use the access token to access the Spotify Web API
     request.get(options, function(error, response, playlist) {
