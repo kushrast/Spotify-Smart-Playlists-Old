@@ -23,16 +23,12 @@
 	<button type="button" class="btn btn-outline-primary" id="play-curr">Play Current Tracks</button>
 </div>
 
-<script src="//rubaxa.github.io/Sortable/Sortable.js"></script>
 <script>
-	var list = document.getElementById("tracks");
-	Sortable.create(list, {
-		group: 'tracks'
-	}); // That's all.
-	var curr = document.getElementById("curr");
-	Sortable.create(curr, {
-		group: 'tracks'
-	}); // That's all.
+	$( function() {
+    $( "#tracks, #curr" ).sortable({
+      connectWith: ".song-list"
+    }).disableSelection();
+  } );// That's all.
 
 	$( "#play-curr" ).click(function() {
 		var curr_tracks = $('#curr.li');
