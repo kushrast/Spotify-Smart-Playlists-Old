@@ -187,7 +187,7 @@ app.get('/play_current', function(req, res) {
       headers: { 'Authorization': 'Bearer ' + req.body.access_token },
       data: {
       	'uris': req.body.uris
-      }
+      },
       json: true
     };
 
