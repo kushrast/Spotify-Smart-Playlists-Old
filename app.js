@@ -184,7 +184,7 @@ router.get('/invalid', function(req, res, next) {
 app.post('/play_current', function(req, res) {
 	var options = {
       url: 'https://api.spotify.com/v1/me/player/play',
-      headers: { 'Authorization': 'Bearer ' + req.body.access_token },
+      headers: { 'Authorization': 'Bearer ' + req.body.access },
       data: {
       	'uris': req.body.uris
       },
