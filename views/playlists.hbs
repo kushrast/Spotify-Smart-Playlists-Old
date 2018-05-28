@@ -3,12 +3,12 @@
 		<div class="card-body">
 		<h5 class="card-title">Playlist Tracks</h5>
 			<ol id="tracks" class="list-group song-list">
-				{{#items}}
-				  <li class="dl-horizontal list-group-item">
-				      <dt class="playlist_uri">Added At</dt><dd>{{added_at}}</a></dd>
-				      <dt class="playlist_uri">Name</dt><dd>{{track.name}}</a></dd>
+				{{#tracks.items}}
+				  <li class="dl-horizontal list-group-item" id="{{tracks.uri}}">
+				      <dt class="playlist_uri">Added At</dt><dd>{{tracks.added_at}}</a></dd>
+				      <dt class="playlist_uri">Name</dt><dd>{{tracks.track.name}}</a></dd>
 				  </li>
-				{{/items}}
+				{{/tracks.items}}
 			</ol>
 		</div>
 	</div>
@@ -20,6 +20,7 @@
 			</ol>
 		</div>
 	</div>
+	<button type="button" class="btn btn-outline-primary" id="play-curr">Play Current Tracks</button>
 </div>
 
 <script src="//rubaxa.github.io/Sortable/Sortable.js"></script>
@@ -32,4 +33,20 @@
 	Sortable.create(curr, {
 		group: 'tracks'
 	}); // That's all.
+
+	$( "#play-curr" ).click(function() {
+		var curr_tracks = $('#curr.li');
+		console.log(curr_tracks);
+	  	// $.ajax({
+	   //      url: 'https://api.spotify.com/v1/me/player/play',
+	   //      headers: {
+	   //        'Authorization': 'Bearer ' + {{access.access_token}}
+	   //      },
+	   //      success: function(response) {
+	   //        userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+	   //        $('#login').hide();
+	   //        $('#loggedin').show();
+	   //      }
+	   //  });
+	});
 </script>
