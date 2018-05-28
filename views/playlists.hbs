@@ -42,9 +42,9 @@
 	        headers: {
 	          'Authorization': 'Bearer {{access_token}}'
 	        },
-	        data: {
+	        data: JSON.stringify({
 	        	'uris': track_uris
-	        }
+	        })
 	    });
 	});
 </script>
