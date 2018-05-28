@@ -156,8 +156,11 @@ router.get('/playlists/', function(req, res, next) {
 
         // use the access token to access the Spotify Web API
         request.get(options, function(error, response, playlist) {
-        	console.log(playlist);
-			res.render('playlists', playlist);
+        	data = {
+        		'tracks': playlist,
+        		'access_token': req.session.access_token
+        	}
+			res.render('playlists', data);
 		});
 	}
 });
