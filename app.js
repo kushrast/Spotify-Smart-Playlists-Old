@@ -183,7 +183,7 @@ router.get('/invalid', function(req, res, next) {
 
 app.post('/play_current', function(req, res) {
 	try {
-		var body = JSON.parse(req.body);
+		var body = JSON.parse(Object.keys(req.body)[0]);
 	} catch(error) {
 		console.log(error);
 	}
