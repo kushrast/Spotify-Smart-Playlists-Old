@@ -4,9 +4,9 @@
 		<h5 class="card-title">Playlist Tracks</h5>
 			<ol id="tracks" class="list-group song-list">
 				{{#tracks.items}}
-				  <li class="dl-horizontal list-group-item" id="{{tracks.uri}}">
-				      <dt class="playlist_uri">Added At</dt><dd>{{tracks.added_at}}</a></dd>
-				      <dt class="playlist_uri">Name</dt><dd>{{tracks.track.name}}</a></dd>
+				  <li class="dl-horizontal list-group-item" id="{{uri}}">
+				      <dt class="playlist_uri">Added At</dt><dd>{{added_at}}</a></dd>
+				      <dt class="playlist_uri">Name</dt><dd>{{track.name}}</a></dd>
 				  </li>
 				{{/tracks.items}}
 			</ol>
