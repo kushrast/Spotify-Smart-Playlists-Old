@@ -40,10 +40,10 @@
 	  	$.ajax({
 	        url: '/play_current',
 	        type: 'post',
-	        data: JSON.stringify({
+	        data: {
 	        	'access': "{{access_token}}",
 	        	'uris': track_uris
-	        })
+	        }
 	    });
 	});
 </script>
