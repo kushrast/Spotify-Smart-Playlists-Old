@@ -4,7 +4,7 @@
 		<h5 class="card-title">Playlist Tracks</h5>
 			<ol id="tracks" class="list-group song-list">
 				{{#tracks.items}}
-				  <li class="dl-horizontal list-group-item" id="{{uri}}">
+				  <li class="dl-horizontal list-group-item" id="{{track.uri}}">
 				      <dt class="playlist_uri">Added At</dt><dd>{{added_at}}</a></dd>
 				      <dt class="playlist_uri">Name</dt><dd>{{track.name}}</a></dd>
 				  </li>
@@ -31,8 +31,12 @@
   } );// That's all.
 
 	$( "#play-curr" ).click(function() {
-		var curr_tracks = $('#curr.li');
-		console.log(curr_tracks);
+		var track_uris = []
+		var curr_tracks = $('#curr');
+		$("#curr").children().each(function() {
+		    console.log($(this).attr('id'));
+		    track_uris.append($(this).attr('id'));
+		});
 	  	// $.ajax({
 	   //      url: 'https://api.spotify.com/v1/me/player/play',
 	   //      headers: {
