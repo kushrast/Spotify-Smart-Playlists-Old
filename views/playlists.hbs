@@ -38,13 +38,11 @@
 		    track_uris.push($(this).attr('id'));
 		});
 	  	$.ajax({
-	        url: 'https://api.spotify.com/v1/me/player/play',
-	        headers: {
-	          'Authorization': 'Bearer {{access_token}}'
-	        },
-	        data: JSON.stringify({
+	        url: '/play_current',
+	        data: {
+	        	'access': {{access_token}},
 	        	'uris': track_uris
-	        })
+	        }
 	    });
 	});
 </script>

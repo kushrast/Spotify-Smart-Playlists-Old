@@ -181,6 +181,24 @@ router.get('/invalid', function(req, res, next) {
 	res.render('invalid');
 })
 
+app.get('/play_current', function(req, res) {
+	var options = {
+      url: 'https://api.spotify.com/v1/me/player/play',
+      headers: { 'Authorization': 'Bearer ' + req.body.access_token },
+      data: {
+      	'uris': req.body.uris
+      }
+      json: true
+    };
+
+    console.log(options);
+
+    // use the access token to access the Spotify Web API
+    request.get(options, function(error, response, playlist) {
+    	console.log(error)
+	});
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
