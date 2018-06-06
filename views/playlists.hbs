@@ -20,8 +20,9 @@
 			</ol>
 		</div>
 	</div>
-	<button type="button" class="btn btn-outline-primary" id="play-curr">Play Current Tracks</button>
 </div>
+<button type="button" class="btn btn-line" id="add_list">+ Add List</button>
+<button type="button" class="btn btn-outline-primary" id="play-curr">Play Current Tracks</button>
 
 <script src="//rubaxa.github.io/Sortable/Sortable.js"></script>
 <script>
@@ -50,4 +51,21 @@
 	        })
 	    });
 	});
+
+	$("#add_list").click(function() {
+		var list = '<div class="card"> \
+		<div class="card-body"> \
+		<h5 class="card-title">Another Title</h5> \
+			<ol id="curr" class="list-group song-list"> \
+			</ol> \
+		</div> \
+	</div>';
+
+		master.appendChild(list);
+		[].forEach.call(master.getElementsByClassName('song-list'), function(e1) {
+		Sortable.create(e1, {
+			group: 'song-list'
+		});
+	});
+	})
 </script>
