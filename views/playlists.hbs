@@ -25,12 +25,14 @@
 
 <script src="//rubaxa.github.io/Sortable/Sortable.js"></script>
 <script>
+	var master = document.getElementById("playlist-bod");
+	Sortable.create(master);
 
-	var foo = document.getElementById("tracks");
-	Sortable.create(foo, { group: "song-list" });
-
-	var foo = document.getElementById("curr");
-	Sortable.create(foo, { group: "song-list" });
+	[].forEach.call(master.getElementsByClassName('card'), function(e1) {
+		Sortable.create(e1, {
+			group: 'song-list'
+		})
+	});
 
 	$( "#play-curr" ).click(function() {
 		var track_uris = []
