@@ -28,10 +28,10 @@
 	var master = document.getElementById("playlist-bod");
 	Sortable.create(master);
 
-	[].forEach.call(master.getElementsByClassName('card'), function(e1) {
+	[].forEach.call(master.getElementsByClassName('song-list'), function(e1) {
 		Sortable.create(e1, {
 			group: 'song-list'
-		})
+		});
 	});
 
 	$( "#play-curr" ).click(function() {
