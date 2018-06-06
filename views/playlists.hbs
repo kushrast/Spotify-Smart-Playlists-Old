@@ -60,7 +60,7 @@
 			</ol> \
 		</div> \
 	</div>';
-		master.appendChild($.parseHTML(list));
+		master.append($.parseHTML(list));
 		[].forEach.call(master.getElementsByClassName('song-list'), function(e1) {
 		Sortable.create(e1, {
 			group: 'song-list'
