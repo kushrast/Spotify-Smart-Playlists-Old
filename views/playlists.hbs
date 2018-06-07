@@ -53,14 +53,14 @@
 	});
 
 	$("#add_list").click(function() {
-		var list = '<div class="card"> \
-		<div class="card-body"> \
+		var wrapper= document.createElement('div');
+		element.classList.add("card");
+		wrapper.innerHTML= '<div class="card-body"> \
 		<h5 class="card-title">Another Title</h5> \
 			<ol id="curr" class="list-group song-list"> \
 			</ol> \
-		</div> \
-	</div>';
-		master.append($.parseHTML(list));
+		</div>';
+		master.appendChild(wrapper);
 		[].forEach.call(master.getElementsByClassName('song-list'), function(e1) {
 		Sortable.create(e1, {
 			group: 'song-list'
