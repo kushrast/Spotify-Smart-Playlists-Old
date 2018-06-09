@@ -63,9 +63,10 @@
 		});
 	});
 
-	$( "#play-curr" ).click(function() {
+	function playSongs(event) {
+		item = event.target
 		var track_uris = []
-		var curr_tracks = this.parentElement.getElementsByClassName("song-list");
+		var curr_tracks = item.parentElement.getElementsByClassName("song-list");
 		$(curr_tracks).children().each(function() {
 		    console.log($(this).attr('id'));
 		    track_uris.push($(this).attr('id'));
@@ -78,7 +79,9 @@
 	        	'uris': track_uris
 	        })
 	    });
-	});
+	}
+
+	$(document).on('click', '.play-curr', playSongs);
 
 	$("#add_list").click(function() {
 		var wrapper= document.createElement('div');
