@@ -82,11 +82,18 @@
 	$("#add_list").click(function() {
 		var wrapper= document.createElement('div');
 		wrapper.classList.add("card");
-		wrapper.innerHTML= '<div class="card-body"> \
-		<h5 class="card-title">Another Title</h5> \
-			<ol id="curr" class="list-group song-list"> \
-			</ol> \
-		</div>';
+		wrapper.innerHTML= '<div class="card-body">\
+				<h5 class="card-title">Current Tracks</h5>\
+				<div class="row">\
+					<div class="play-handle col-md-1">\
+						<i class="fas fa-arrows-alt"></i>\
+					</div>\
+					<div class="col-md-11">\
+						<ol id="curr" class="list-group song-list">\
+						</ol>\
+					</div>\
+				</div>\
+			</div>';
 		master.appendChild(wrapper);
 		[].forEach.call(master.getElementsByClassName('song-list'), function(e1) {
 		Sortable.create(e1, {
