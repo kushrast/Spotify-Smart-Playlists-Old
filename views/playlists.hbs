@@ -4,17 +4,15 @@
 		<h5 class="card-title">Playlist Tracks</h5>
 			<ol id="tracks" class="list-group song-list">
 				{{#tracks.items}}
-					<div class="container">
-					  <li class="row dl-horizontal list-group-item" id="{{track.uri}}">
-					  	<div class="col-md-2">
-					  		<i class="fas fa-music"></i>
-					  	</div>
-					  	<div class="col">
-					      <dt class="playlist_uri">Added At</dt><dd>{{added_at}}</a></dd>
-					      <dt class="playlist_uri">Name</dt><dd>{{track.name}}</a></dd>
-					    </div>
-					  </li>
-					</div>
+				  <li class="row dl-horizontal list-group-item" id="{{track.uri}}">
+				  	<div class="col-md-2 song-handle">
+				  		<i class="fas fa-music"></i>
+				  	</div>
+				  	<div class="col">
+				      <dt class="playlist_uri">Added At</dt><dd>{{added_at}}</a></dd>
+				      <dt class="playlist_uri">Name</dt><dd>{{track.name}}</a></dd>
+				    </div>
+				  </li>
 				{{/tracks.items}}
 			</ol>
 		</div>
@@ -38,7 +36,8 @@
 
 	[].forEach.call(master.getElementsByClassName('song-list'), function(e1) {
 		Sortable.create(e1, {
-			group: 'song-list'
+			group: 'song-list',
+			handle: 'song-handle'
 		});
 	});
 
@@ -70,7 +69,8 @@
 		master.appendChild(wrapper);
 		[].forEach.call(master.getElementsByClassName('song-list'), function(e1) {
 		Sortable.create(e1, {
-			group: 'song-list'
+			group: 'song-list',
+			handle: 'song-handle'
 		});
 	});
 	})
