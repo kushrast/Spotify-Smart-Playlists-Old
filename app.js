@@ -201,6 +201,10 @@ app.post('/play_current', function(req, res) {
 	});
 });
 
+app.post('/save-playlist', function(req, res) {
+	
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

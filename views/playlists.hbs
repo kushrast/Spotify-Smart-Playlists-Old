@@ -4,10 +4,17 @@
 		<h5 class="card-title">Playlist Tracks</h5>
 			<ol id="tracks" class="list-group song-list">
 				{{#tracks.items}}
-				  <li class="dl-horizontal list-group-item" id="{{track.uri}}">
-				      <dt class="playlist_uri">Added At</dt><dd>{{added_at}}</a></dd>
-				      <dt class="playlist_uri">Name</dt><dd>{{track.name}}</a></dd>
-				  </li>
+					<div class="container">
+					  <li class="row dl-horizontal list-group-item" id="{{track.uri}}">
+					  	<div class="col-md-2">
+					  		<i class="fas fa-music"></i>
+					  	</div>
+					  	<div class="col">
+					      <dt class="playlist_uri">Added At</dt><dd>{{added_at}}</a></dd>
+					      <dt class="playlist_uri">Name</dt><dd>{{track.name}}</a></dd>
+					    </div>
+					  </li>
+					</div>
 				{{/tracks.items}}
 			</ol>
 		</div>
