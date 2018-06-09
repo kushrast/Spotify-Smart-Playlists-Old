@@ -7,12 +7,14 @@
 					{{#tracks.items}}
 					  <li class="dl-horizontal list-group-item" id="{{track.uri}}">
 					  	<div class="row">
-						  	<div class="col-md-2">
+						  	<div class="col-md-1">
 						  		<i class="fas fa-music song-handle"></i>
 						  	</div>
-						  	<div class="col-md-10">
+						  	<div class="col-md-3">
 						      <dt class="playlist_uri">Added At</dt><dd>{{added_at}}</a></dd>
-						      <dt class="playlist_uri">Name</dt><dd>{{track.name}}</a></dd>
+						    </div>
+						    <div class="col-md-3">
+						    	<dt class="playlist_uri">Name</dt><dd>{{track.name}}</a></dd>
 						    </div>
 					    </div>
 					  </li>
@@ -40,8 +42,7 @@
 
 	[].forEach.call(master.getElementsByClassName('song-list'), function(e1) {
 		Sortable.create(e1, {
-			group: 'song-list',
-			handle: '.song-handle'
+			group: 'song-list'
 		});
 	});
 
@@ -73,8 +74,7 @@
 		master.appendChild(wrapper);
 		[].forEach.call(master.getElementsByClassName('song-list'), function(e1) {
 		Sortable.create(e1, {
-			group: 'song-list',
-			handle: '.song-handle'
+			group: 'song-list'
 		});
 	});
 	})
