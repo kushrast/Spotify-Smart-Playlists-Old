@@ -201,8 +201,7 @@ app.post('/play_current', function(req, res) {
 	});
 });
 
-app.post('/save-playlist', function(req, res) {
-	
+app.get('/dev-playlist', function(req, res) {
 })
 
 // catch 404 and forward to error handler
