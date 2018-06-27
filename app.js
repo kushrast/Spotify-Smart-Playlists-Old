@@ -8,6 +8,7 @@ var querystring = require('querystring')
 var bodyParser = require('body-parser');
 var request = require('request');
 var session = require('express-session');
+var async = require("async");
 
 var app = express();
 
@@ -27,6 +28,20 @@ var client_id = '0a5c5df0c91e48ab9da23fc2facc3c40'; // Your client id
 var client_secret = 'bc3359f757a14b49b5740cf643b1b632'; // Your secret
 var redirect_uri = 'https://spotify-sessions-kush.herokuapp.com/callback'; // Your redirect uri
 
+let uri = 'mongodb://kush_spotify:thisoneisforspotify1@ds235860.mlab.com:35860/heroku_lr7k2nt1';
+var db = null;
+
+mongodb.MongoClient.connect(uri, function(err, client) {
+
+  if(err) throw err;
+
+  /*
+   * Get the database from the client. Nothing is required to create a
+   * new database, it is created automatically when we insert.
+   */
+
+  db = client.db('song-data');
+}
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -202,7 +217,81 @@ app.post('/play_current', function(req, res) {
 });
 
 app.get('/dev-playlist', function(req, res) {
-})
+	async.parallel([
+		db: function(callback) {
+			var uri = req.query.uri.split(":");
+			let playlists = db.collection('playlists');
+			playlists.find({
+				'playlist_key': uri[2] + ":" + uri[4]
+			}, function(err, doc) {
+				if (err) throw err;
+				callback(null, doc);
+			});
+		},
+		spotify: function(callback) {
+			if (!req.session.access_token) {
+				res.redirect("/invalid");
+			} else {
+				var uri = req.query.uri.split(":");
+				var options = {
+		          url: 'https://api.spotify.com/v1/users/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
+		          headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+		          json: true
+		        };
+		        // use the access token to access the Spotify Web API
+		        request.get(options, function(error, response, playlist) {
+		        	callback(null, playlist);
+				});
+			}
+		}],
+		function done(err, results) {
+			if (results.db == null) {
+				data = {
+	        		'tracks': results.playlist,
+	        		'access_token': req.session.access_token
+	        	};
+				res.render('playlists', data);
+			} else {
+				var spotify_songs = new Map();
+				var new_songs = new Map();
+
+				results.playlist.items.forEach(function(song) {
+					spotify_songs.set(song.track.uri, 1);
+					new_songs.set(song.track.uri, 1);
+				});
+				moods = {};
+				new_mood = false;
+				results.db.forEach(function(mood){
+					if (mood.name == "new") {
+						new_mood = true;
+					}
+					updated_songs_list = [];
+					mood.tracks.forEach(function(song) {
+						if(spotify_songs.has(song.track.uri)) {
+							updated_songs_list.append(song);
+							new_songs.delete(song.track.uri);
+						}
+					});
+					mood.tracks = updated_songs_list;
+					moods[mood.name] = mood;
+				});
+
+				if (!new_mood) {
+					new_mood["new"] = {
+						tracks: []
+					};
+				}
+
+				new_songs.forEach(function(song) {
+					moods["new"].tracks.append(song);
+				});
+				delete results.playlist.items;
+				results.playlist.moods = moods;
+				console.log(results.playlist);
+				res.redirect('/playlist', results.playlist);
+			}
+		});
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

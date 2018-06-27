@@ -18,5 +18,8 @@
     "requests": "^0.2.2",
     "serve-favicon": "~2.4.2",
     "sortablejs": "^1.7.0"
+  },
+  "devDependencies": {
+    "async": "^2.6.1"
   }
 }
