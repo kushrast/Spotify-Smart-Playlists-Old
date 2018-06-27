@@ -41,7 +41,7 @@ mongodb.MongoClient.connect(uri, function(err, client) {
    */
 
   db = client.db('song-data');
-}
+});
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
