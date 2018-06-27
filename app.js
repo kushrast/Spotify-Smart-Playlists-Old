@@ -217,7 +217,7 @@ app.post('/play_current', function(req, res) {
 });
 
 app.get('/dev-playlist', function(req, res) {
-	async.parallel([
+	async.parallel({
 		db: function(callback) {
 			var uri = req.query.uri.split(":");
 			let playlists = db.collection('playlists');
@@ -243,7 +243,7 @@ app.get('/dev-playlist', function(req, res) {
 		        	callback(null, playlist);
 				});
 			}
-		}],
+		}},
 		function done(err, results) {
 			if (results.db == null) {
 				data = {
