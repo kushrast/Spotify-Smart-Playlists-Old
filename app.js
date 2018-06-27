@@ -29,7 +29,7 @@ var client_id = '0a5c5df0c91e48ab9da23fc2facc3c40'; // Your client id
 var client_secret = 'bc3359f757a14b49b5740cf643b1b632'; // Your secret
 var redirect_uri = 'https://spotify-sessions-kush.herokuapp.com/callback'; // Your redirect uri
 
-let uri = 'mongodb://kush_spotify:thisoneisforspotify1@ds235860.mlab.com:35860/heroku_lr7k2nt1';
+let uri = 'mongodb://kush_spotify:thisoneisforspotify1@ds235860.mlab.com:35860/song-data';
 var db = null;
 
 mongodb.MongoClient.connect(uri, function(err, client) {
